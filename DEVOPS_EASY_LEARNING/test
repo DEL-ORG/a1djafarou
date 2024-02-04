@@ -2,7 +2,7 @@
 
 version: '3'  # Use version 3 or higher of Docker Compose syntax
 
-services:
+s:
   web:
     image: nginx:latest  # Use the latest Nginx image from Docker Hub
     ports:
