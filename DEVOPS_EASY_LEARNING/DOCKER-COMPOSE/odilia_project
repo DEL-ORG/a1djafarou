@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  yelb-ui:
+    image: mreferre/yelb-ui:0.7
+    container_name: yelb-ui
+    ports:
+      - 80:80
+    depends_on:
+      - yelb-appserver
+    networks:
+      - odilia
+  
+  yelb-appserver:
+    image: mreferre/yelb-appserver:0.5 
+    container_name: yelb-appserver
+    depends_on: 
+      - yelb-db
+    networks:
+      - odilia
+  
+  yelb-db:
+    image: mreferre/yelb-db:0.5
+    container_name: yelb-db
+    volumes:
+      - steph:/var/lib/postgresql/data
+    
+
+  odilia-db-replication03:
+    image: mreferre/yelb-db:0.5
+    container_name: odilia-db-replication03
+    volumes:
+      - steph1:/var/lib/postgresql/data
+
+  odilia-db-replication02:
+    volumes:
+    image: mreferre/yelb-db:0.5
+    container_name: odilia-db-replication02
+      - steph:/var/lib/postgresql/data
+
+  odilia-db-replication01:
+    image: mreferre/yelb-db:0.5
+    container_name: odilia-db-replication01
+    
+
+  redis-server:
+    image: redis:4.0.2
+    container_name: redis-server
+    
+
+
+  odilia-redis01:
+    image: redis:4.0.2
+    container_name: odilia-redis01
+    
+
+  odilia-redis02: 
+    image: redis:4.0.2
+    container_name: odilia-redis02
+    
+
+
+  
+  odilia-redis-sentinel01:
+    image: redis:4.0.2
+    container_name: odilia-redis-sentinel01
+    
+
+  odilia-redis-sentinel02:
+    image: redis:4.0.2
+    container_name: odilia-redis-sentinel02
+    
+
+  odilia-redis-sentinel03:
+    image: redis:4.0.2
+    container_name: odilia-redis-sentinel03
+    

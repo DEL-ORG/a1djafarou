@@ -1,0 +1,26 @@
+# docker-compose.yml
+
+version: '3'  # Use version 3 or higher of Docker Compose syntax
+
+services:
+  web:
+    image: nginx:latest  # Use the latest Nginx image from Docker Hub
+    ports:
+      - "80:80"  # Map port 80 on the host to port 80 on the container
+    volumes:
+      - ./web-content:/usr/share/nginx/html  # Mount a local directory into the container
+
+  db:
+    image: mysql:latest  # Use the latest MySQL image from Docker Hub
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"  # Map port 3306 on the host to port 3306 on the container
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persist MySQL data between container restarts
+
+volumes:
+  mysql-data:  # Define a named volume for MySQL data persistence
